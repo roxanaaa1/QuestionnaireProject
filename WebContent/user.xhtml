@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://java.sun.com/jsf/core">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>User</title>
+</head>
+<body>
+
+	<div align="right">
+		<h:form>
+			<h:commandButton value="Log out" action="index"></h:commandButton>
+		</h:form>
+	</div>
+
+	<div align="center">
+		<h2>
+			Hello: #{loginBean.username} <br></br>
+		</h2>
+
+		<h:form>
+			<h:dataTable value="#{userSeeQuestionnaire.userquestionnaires}"
+				var="userQuestionnaire">
+				<h:column>
+					<h:outputText value="#{userQuestionnaire.questionnaire.nume}"
+						rendered="#{userQuestionnaire.user == loginBean.user}" />
+				</h:column>
+
+				<h:column>
+					<h:outputText value="#{userQuestionnaire.score}"
+						rendered="#{userQuestionnaire.score ge 0 and userQuestionnaire.user == loginBean.user}" />
+
+					<h:outputText value="no score"
+						rendered="#{userQuestionnaire.score lt 0 and userQuestionnaire.user == loginBean.user}" />
+				</h:column>
+
+				<h:column>
+					<h:commandButton
+						rendered="#{userQuestionnaire.score ge 0 and userQuestionnaire.user == loginBean.user}"
+						action="solvedquestionnaire?faces-redirect=true" value="See history" >
+						<p:setPropertyActionListener value="#{userQuestionnaire}"
+							target="#{solvedQuestionnaireBean.userquestionnaire}" />
+					</h:commandButton>
+
+					<h:commandButton
+						rendered="#{userQuestionnaire.score lt 0 and userQuestionnaire.user == loginBean.user}"
+						action="solvequestionnaire?faces-redirect=true" value="Solve">
+						<p:setPropertyActionListener value="#{userQuestionnaire}"
+							target="#{solveQuestionnaireBean.userquestionnaire}" />
+					</h:commandButton>
+				</h:column>
+			</h:dataTable>
+		</h:form>
+
+	</div>
+</body>
+</html>

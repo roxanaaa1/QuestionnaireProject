@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://java.sun.com/jsf/core">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>See questionnaires</title>
+
+</head>
+<body>
+
+	<div align="right">
+		<h:form>
+			<h:commandButton value="Log out" action="index"></h:commandButton>
+		</h:form>
+	</div>
+
+	<div align="center">
+		<h2>Questionnaires</h2>
+
+		<h:form>
+			<h:dataTable value="#{assignQuestionnaireBean.questionnaires}"
+				var="questionnaire"
+				rendered="#{not empty assignQuestionnaireBean.questionnaires}"
+				border="1">
+
+				<h:column id="id" headerText="Questionnaire id">
+					<h:outputText value="#{questionnaire.idquestionnaire}"></h:outputText>
+				</h:column>
+
+				<h:column id="name" headerText="Name">
+					<h:outputText value="#{questionnaire.nume}"></h:outputText>
+				</h:column>
+
+				<h:column id="users" headerText="Users">
+					<h:dataTable value="#{questionnaire.userquestionnaires}"
+						var="userquestionnaire"
+						rendered="#{not empty questionnaire.userquestionnaires}"
+						border="1">
+
+						<h:column id="User" headerText="User questionnaire">
+							<h:outputText value="#{userquestionnaire.user.username}"></h:outputText>
+						</h:column>
+
+						<h:column id="see" headerText="see">
+							<h:commandButton value="See questionnaire"
+								action="solvedquestionnaire?faces-redirect=true">
+								<p:setPropertyActionListener
+									value="#{userquestionnaire}"
+									target="#{solvedQuestionnaireBean.userquestionnaire}"></p:setPropertyActionListener>
+							</h:commandButton>
+						</h:column>
+
+					</h:dataTable>
+
+				</h:column>
+			</h:dataTable>
+
+			<br />
+			<br />
+			<br />
+
+		
+			Username: 
+			<h:selectOneMenu value="#{assignQuestionnaireBean.user}"
+				converter="userConverter">
+				<p:selectItems value="#{assignQuestionnaireBean.users}" var="user"
+					itemLabel="#{user.username}" itemValue="#{user}" />
+			</h:selectOneMenu>
+			<br />
+			Id questionnaire:
+			<h:selectOneMenu value="#{assignQuestionnaireBean.questionnaire}"
+				converter="questionnaireConverter">
+				<p:selectItems value="#{assignQuestionnaireBean.questionnaires}"
+					var="questionnaire" itemLabel="#{questionnaire.nume}"
+					itemValue="#{questionnaire}" />
+			</h:selectOneMenu>
+			<br />
+			<h:commandButton value="Assign questionnaire"
+				action="#{assignQuestionnaireBean.assign}" />
+		</h:form>
+
+	</div>
+</body>
+</html>

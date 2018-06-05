@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Insert title here</title>
+</head>
+<body>
+
+	<div align="right">
+		<h:form>
+			<h:commandButton value="Log out" action="index"></h:commandButton>
+		</h:form>
+	</div>
+
+	Name of questionnaire:
+	<h:outputText
+		value="#{solvedQuestionnaireBean.userquestionnaire.questionnaire.nume}"></h:outputText>
+
+	<br />
+	<br />
+
+
+	<ui:repeat var="question" value="#{solvedQuestionnaireBean.questions}">
+
+		Q: <h:outputText value="#{question.question}" />
+		<br />
+
+		A: <h:outputText
+			value="#{solvedQuestionnaireBean.selectedanswers[question.idquestion].answer}" />
+		<br />
+	</ui:repeat>
+
+
+</body>
+</html>

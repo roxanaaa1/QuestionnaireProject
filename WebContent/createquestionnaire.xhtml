@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Create questionnaire</title>
+</head>
+<body>
+	<div align="right">
+		<h:form>
+			<h:commandButton value="Log out" action="index"></h:commandButton>
+		</h:form>
+	</div>
+
+	<div align="center">
+		#{createQuestionnaireBean.message} <br />
+
+
+		<h:form>
+	Name of questionnaire:
+	<h:inputText value="#{createQuestionnaireBean.questionnaire.nume}"></h:inputText>
+
+			<br />
+			<br /> Questions:
+	<h:dataTable value="#{createQuestionnaireBean.questions}"
+				var="questionVal"
+				rendered="#{not empty createQuestionnaireBean.questions}">
+
+				<h:column>
+					<h:inputText value="#{questionVal.question}" />
+					<br />
+				</h:column>
+
+				<h:column>
+					<ui:repeat
+						value="#{createQuestionnaireBean.answers[questionVal.idquestion]}"
+						var="answer">
+
+						<h:inputText value="#{answer.answer}" />
+						<br />
+					</ui:repeat>
+				</h:column>
+
+			</h:dataTable>
+
+			<h:commandButton value="Add question"
+				action="#{createQuestionnaireBean.addQuestion}"></h:commandButton>
+			<h:commandButton value="Submit questionnaire"
+				action="#{createQuestionnaireBean.submit}"></h:commandButton>
+
+		</h:form>
+	</div>
+</body>
+</html>

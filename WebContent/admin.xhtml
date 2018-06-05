@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Admin</title>
+</head>
+<body>
+	<div align="right">
+		<h:form>
+			<h:commandButton value="Log out" action="index"></h:commandButton>
+		</h:form>
+	</div>
+	<div align="center">
+		<h2>Hello #{loginBean.username}</h2>
+
+		<h:form>
+			<h:commandButton value="Create new questionnaire"
+				action="createquestionnaire"></h:commandButton>
+			<br />
+			<h:commandButton value="See all questionnaires"
+				action="seequestionnaire"></h:commandButton>
+		</h:form>
+	</div>
+</body>
+</html>
